@@ -1,0 +1,2 @@
+# mediapipemultihandstrackingapp
+Gesture recognition through mediapipe
