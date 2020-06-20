@@ -6,5 +6,7 @@ see these [instructions](https://google.github.io/mediapipe/getting_started/andr
 
 If it helps you, please give me a star 。
 
+![](https://oscimg.oschina.net/oscnet/up-3536fb9dd63dfb49e388960512498489620.JPEG)
+
 
 
