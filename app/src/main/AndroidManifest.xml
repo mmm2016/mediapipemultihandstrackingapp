@@ -22,6 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data android:name="cameraFacingFront" android:value="true"/>
+        <meta-data android:name="binaryGraphName" android:value="multi_hand_tracking_mobile_gpu.binarypb"/>
+        <meta-data android:name="inputVideoStreamName" android:value="input_video"/>
+        <meta-data android:name="outputVideoStreamName" android:value="output_video"/>
+        <meta-data android:name="flipFramesVertically" android:value="true"/>
+
     </application>
 
 </manifest>
