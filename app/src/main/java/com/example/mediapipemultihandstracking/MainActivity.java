@@ -23,11 +23,14 @@ import com.google.mediapipe.formats.proto.LandmarkProto;
 import com.google.mediapipe.formats.proto.LandmarkProto.NormalizedLandmark;
 import com.google.mediapipe.formats.proto.LandmarkProto.NormalizedLandmarkList;
 import com.google.mediapipe.formats.proto.RectProto;
+import com.google.mediapipe.framework.AndroidPacketCreator;
 import com.google.mediapipe.framework.Packet;
 import com.google.mediapipe.framework.PacketCallback;
 import com.google.mediapipe.framework.PacketGetter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Main activity of MediaPipe multi-hand tracking app.
@@ -35,9 +38,13 @@ import java.util.List;
 public class MainActivity extends BasicActivity {
     private static final String TAG = "MainActivity";
 
-    private static final String OUTPUT_LANDMARKS_STREAM_NAME = "multi_hand_landmarks";
-    private static final String OUTPUT_HAND_RECT = "multi_hand_rects";
+    private static final String OUTPUT_HAND_RECT = "hand_rects_from_palm_detections";
     private List<NormalizedLandmarkList> multiHandLandmarks;
+
+    private static final String INPUT_NUM_HANDS_SIDE_PACKET_NAME = "num_hands";
+    private static final String OUTPUT_LANDMARKS_STREAM_NAME = "hand_landmarks";
+    // Max number of hands to detect/process.
+    private static final int NUM_HANDS = 2;
 
     private TextView gesture;
     private TextView moveGesture;
@@ -48,6 +55,10 @@ public class MainActivity extends BasicActivity {
         gesture = findViewById(R.id.gesture);
         moveGesture = findViewById(R.id.move_gesture);
 
+        AndroidPacketCreator packetCreator = processor.getPacketCreator();
+        Map<String, Packet> inputSidePackets = new HashMap<>();
+        inputSidePackets.put(INPUT_NUM_HANDS_SIDE_PACKET_NAME, packetCreator.createInt32(NUM_HANDS));
+        processor.setInputSidePackets(inputSidePackets);
 
         processor.addPacketCallback(
                 OUTPUT_LANDMARKS_STREAM_NAME,
